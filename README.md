@@ -1,46 +1,257 @@
-# Getting Started with Create React App
+# Currency Converter Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive React application for currency conversion with real-time exchange rates, user authentication, and conversion history tracking.
 
-## Available Scripts
+## Frontend Application
+🌐 **[Currency Converter Backend](https://github.com/felipeejunges/currency-converter-back)**
 
-In the project directory, you can run:
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🔐 Authentication
+- User registration and login with JWT authentication
+- Protected routes and session management
+- Secure logout functionality
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 💱 Currency Conversion
+- Real-time currency conversion with live exchange rates
+- Support for multiple currencies (USD, BRL, EUR, JPY, and more)
+- Form validation and error handling
+- Conversion result display with formatted values
 
-### `npm test`
+### 📊 Conversion History
+- Complete transaction history with pagination
+- Detailed conversion records (amount, rate, timestamp)
+- Responsive table design for all devices
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🎨 User Interface
+- Modern, responsive design with Tailwind CSS and DaisyUI
+- Mobile-first approach with tab navigation on small screens
+- Loading states and error handling
+- Font Awesome icons for enhanced UX
 
-### `npm run build`
+### 🧪 Testing
+- Comprehensive E2E testing with Cypress
+- API mocking for consistent test results
+- Automated testing pipeline with GitHub Actions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Frontend
+- **React 19** - Modern React with latest features
+- **TypeScript** - Type-safe development
+- **React Router DOM** - Client-side routing
+- **Axios** - HTTP client for API communication
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Styling & UI
+- **Tailwind CSS** - Utility-first CSS framework
+- **DaisyUI** - Component library for Tailwind
+- **Flowbite** - Additional UI components
+- **Font Awesome** - Icon library
 
-### `npm run eject`
+### Testing
+- **Cypress** - End-to-end testing
+- **React Testing Library** - Component testing
+- **Jest** - Unit testing framework
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Development Tools
+- **Create React App** - Development environment
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **Autoprefixer** - CSS vendor prefixing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📋 Prerequisites
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Before running this application, ensure you have:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Node.js** (v18 or higher)
+- **npm** (v8 or higher)
+- **Rails Backend** running on port 3000
 
-## Learn More
+### Backend Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This frontend requires the Rails backend to be running. Please start the backend server first before running this frontend application.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The backend should be running on `http://localhost:3000` before starting the frontend.
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/felipeejunges/currency-converter-front.git
+cd currency-converter-front
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Development Server
+
+```bash
+npm start
+```
+
+The application will start on `http://localhost:3001` (configured to avoid conflicts with the Rails backend on port 3000).
+
+### 4. Open in Browser
+
+Open [http://localhost:3001](http://localhost:3001) to view the application in your browser.
+
+## 📱 Available Scripts
+
+### Development
+```bash
+npm start          # Start development server on port 3001
+npm test           # Run unit tests in watch mode
+npm run build      # Build for production
+```
+
+### E2E Testing
+```bash
+npm run cypress:open    # Open Cypress test runner
+npm run cypress:run     # Run tests headlessly
+npm run test:e2e        # Run E2E tests
+```
+
+### Production
+```bash
+npm run build      # Create optimized production build
+npm run eject      # Eject from Create React App (one-way)
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+REACT_APP_API_URL=http://localhost:3000/api/v1
+REACT_APP_PORT=3001
+```
+
+### Port Configuration
+
+The application is configured to run on port 3001 to avoid conflicts with the Rails backend. This is set in the `package.json` start script.
+
+## 🧪 Testing
+
+### Running Tests
+
+1. **Unit Tests**: `npm test`
+2. **E2E Tests**: `npm run cypress:open`
+3. **All Tests**: `npm run test:e2e`
+
+### Test Coverage
+
+- **Login/Register**: Form validation, authentication flows
+- **Currency Conversion**: API integration, error handling
+- **History**: Data display, pagination, responsive design
+- **Navigation**: Route protection, authentication redirects
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+├── contexts/           # React contexts (Auth)
+├── pages/              # Page components
+├── services/           # API services
+├── types/              # TypeScript interfaces
+├── utils/              # Utility functions
+└── App.tsx             # Main application component
+
+cypress/
+├── e2e/               # E2E test files
+├── fixtures/          # Test data
+├── support/           # Custom commands
+└── README.md          # Testing documentation
+```
+
+## 🔌 API Integration
+
+The frontend communicates with the Rails backend through these endpoints:
+
+- `POST /api/v1/login` - User authentication
+- `POST /api/v1/register` - User registration
+- `DELETE /api/v1/logout` - User logout
+- `GET /api/v1/currencies` - Currency listing
+- `POST /api/v1/currencies/conversions` - Currency conversion
+- `GET /api/v1/currencies/conversions` - Conversion history
+
+## 🎨 UI/UX Features
+
+### Responsive Design
+- Mobile-first approach
+- Tab navigation on small screens
+- Desktop navigation on larger screens
+- Optimized for all device sizes
+
+### User Experience
+- Loading states for all async operations
+- Error messages with clear feedback
+- Form validation with visual indicators
+- Smooth transitions and animations
+
+### Accessibility
+- Semantic HTML structure
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast color schemes
+
+## 🚀 Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates an optimized production build in the `build/` folder.
+
+### Deployment Options
+
+- **Netlify**: Drag and drop the `build/` folder
+- **Vercel**: Connect your GitHub repository
+- **AWS S3**: Upload the `build/` folder
+- **Heroku**: Use the buildpack for Create React App
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🔗 Related Projects
+
+### Backend Application
+
+🌐 **[Currency Converter Backend](https://github.com/felipeejunges/currency-converter-back)**
+
+This is the frontend application for the Currency Converter. For the complete backend API and server implementation, check out the Rails backend repository.
+
+## 📹 Video Demonstration
+
+📹 **[Watch Demo Video](https://www.loom.com/share/3f97cd13bf5143e385ad0a8f48fa936a)**
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+1. Check the [Issues](https://github.com/felipeejunges/currency-converter-front/issues) page
+2. Create a new issue with detailed information
+3. Contact the maintainer
+
+---
+
+**Happy coding! 🚀**
