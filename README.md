@@ -2,9 +2,12 @@
 
 A modern, responsive React application for currency conversion with real-time exchange rates, user authentication, and conversion history tracking.
 
-## Frontend Application
+## Backend Application
 🌐 **[Currency Converter Backend](https://github.com/felipeejunges/currency-converter-back)**
 
+## 📹 Video Demonstration
+
+📹 **[Watch Demo Video](https://www.loom.com/share/3f97cd13bf5143e385ad0a8f48fa936a)**
 
 ## 🚀 Features
 
@@ -117,12 +120,6 @@ npm run cypress:run     # Run tests headlessly
 npm run test:e2e        # Run E2E tests
 ```
 
-### Production
-```bash
-npm run build      # Create optimized production build
-npm run eject      # Eject from Create React App (one-way)
-```
-
 ## 🔧 Configuration
 
 ### Environment Variables
@@ -231,26 +228,6 @@ This creates an optimized production build in the `build/` folder.
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🔗 Related Projects
-
-### Backend Application
-
-🌐 **[Currency Converter Backend](https://github.com/felipeejunges/currency-converter-back)**
-
-This is the frontend application for the Currency Converter. For the complete backend API and server implementation, check out the Rails backend repository.
-
-## 📹 Video Demonstration
-
-📹 **[Watch Demo Video](https://www.loom.com/share/3f97cd13bf5143e385ad0a8f48fa936a)**
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-
-1. Check the [Issues](https://github.com/felipeejunges/currency-converter-front/issues) page
-2. Create a new issue with detailed information
-3. Contact the maintainer
 
 ---
 
