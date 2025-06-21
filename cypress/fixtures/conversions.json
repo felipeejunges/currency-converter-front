@@ -1,0 +1,51 @@
+{
+  "conversion": {
+    "transaction_id": 42,
+    "user_id": 123,
+    "from_currency": "USD",
+    "to_currency": "BRL",
+    "from_value": "100.0",
+    "to_value": "525.32",
+    "rate": "5.2532",
+    "timestamp": "2024-05-19T18:00:00Z"
+  },
+  "history": {
+    "conversions": [
+      {
+        "transaction_id": 42,
+        "user_id": 123,
+        "from_currency": "USD",
+        "to_currency": "BRL",
+        "from_value": "100.0",
+        "to_value": "525.32",
+        "rate": "5.2532",
+        "timestamp": "2024-05-19T18:00:00Z"
+      },
+      {
+        "transaction_id": 41,
+        "user_id": 123,
+        "from_currency": "EUR",
+        "to_currency": "USD",
+        "from_value": "50.0",
+        "to_value": "54.25",
+        "rate": "1.085",
+        "timestamp": "2024-05-19T17:30:00Z"
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "count": 2,
+      "limit": 10,
+      "pages": 1
+    }
+  },
+  "empty_history": {
+    "conversions": [],
+    "pagination": {
+      "page": 1,
+      "count": 0,
+      "limit": 10,
+      "pages": 0
+    }
+  }
+} 
