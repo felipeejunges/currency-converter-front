@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './auth/AuthContext';
+import { ProtectedRoute } from './routes/ProtectedRoute';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Convert } from './pages/Convert';
+import { Conversions } from './pages/Conversions';
+import { useAuth } from './auth/AuthContext';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/convert"
+            element={
+              <ProtectedRoute>
+                <Convert />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/conversions"
+            element={
+              <ProtectedRoute>
+                <Conversions />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={<RedirectToConvertOrLogin />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
-}
+};
+
+// Helper component to redirect based on auth
+const RedirectToConvertOrLogin: React.FC = () => {
+  const { isAuthenticated, isLoading } = useAuth();
+  if (isLoading) return null;
+  return <Navigate to={isAuthenticated ? '/convert' : '/login'} replace />;
+};
 
 export default App;

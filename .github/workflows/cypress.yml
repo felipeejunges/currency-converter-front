@@ -1,0 +1,58 @@
+name: Cypress E2E Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Install serve
+        run: npm install -g serve
+
+      - name: Start application
+        run: |
+          echo "Starting production build on port 3001..."
+          serve -s build -l 3001 &
+          sleep 3
+          echo "Checking if application is running..."
+          ps aux | grep serve || true
+          netstat -tlnp | grep :3001 || true
+        env:
+          CI: true
+
+      - name: Wait for application to be ready
+        run: |
+          echo "Waiting for application to start on port 3001..."
+          npx wait-on --timeout 30000 http://localhost:3001
+          echo "Application is ready!"
+          curl -f http://localhost:3001 || echo "Application not responding to curl"
+        timeout-minutes: 1
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          headless: true
+          wait-on: 'http://localhost:3001'
+          wait-on-timeout: 120
+          config: baseUrl=http://localhost:3001
+          record: false 
