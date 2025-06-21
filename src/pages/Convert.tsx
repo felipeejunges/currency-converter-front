@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../auth/AuthContext';
 import { currencyApi } from '../api/currency';
 import { Currency, Conversion } from '../types';
 import { Alert } from '../components/Alert';
@@ -10,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 
 export const Convert: React.FC = () => {
-  const { user, logout } = useAuth();
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [isConverting, setIsConverting] = useState(false);
   const [error, setError] = useState('');
@@ -99,10 +97,6 @@ export const Convert: React.FC = () => {
     } finally {
       setIsConverting(false);
     }
-  };
-
-  const handleLogout = () => {
-    logout();
   };
 
   const swapCurrencies = () => {
