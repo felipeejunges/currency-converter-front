@@ -66,6 +66,11 @@ export const Convert: React.FC = () => {
       return;
     }
 
+    if (formData.fromCurrency === formData.toCurrency) {
+      setError('Please select different currencies for conversion');
+      return;
+    }
+
     const amount = parseFloat(formData.fromValue);
     if (isNaN(amount) || amount <= 0) {
       setError('Please enter a valid amount');
@@ -84,6 +89,7 @@ export const Convert: React.FC = () => {
 
       setConversionResult(result);
       setSuccess('Currency converted successfully!');
+      setFormData(prev => ({ ...prev, fromValue: '' }));
       
       if (window.innerWidth < 1024) {
         setActiveTab('result');
@@ -196,7 +202,6 @@ export const Convert: React.FC = () => {
               onChange={handleFormChange}
               disabled={isConverting}
               step="0.01"
-              min="0"
             />
           </div>
 

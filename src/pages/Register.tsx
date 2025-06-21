@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { Alert } from '../components/Alert';
@@ -18,8 +18,26 @@ export const Register: React.FC = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const { register } = useAuth();
+  const { register, isAuthenticated, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      navigate('/convert');
+    }
+  }, [isAuthenticated, authLoading, navigate]);
+
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="loading loading-spinner loading-lg"></div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -165,7 +183,7 @@ export const Register: React.FC = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                type="email"
+                type="text"
                 name="email"
                 placeholder="Enter your email"
                 className={`input input-bordered ${errors.email ? 'input-error' : ''}`}

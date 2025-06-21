@@ -19,25 +19,33 @@ export const Conversions: React.FC = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    loadCurrencies();
-    loadConversionHistory();
-  }, []);
+    const fetchInitialData = async () => {
+      setIsLoading(true);
+      try {
+        const currenciesResponse = await currencyApi.getCurrencies();
+        setCurrencies(currenciesResponse.currencies);
+        
+        const historyResponse = await currencyApi.getConversionHistory(page);
+        setConversionHistory(historyResponse.conversions);
+        setMaxPage(historyResponse.pagination.pages);
+        
+      } catch (err: any) {
+        setError('Failed to load page data. Please try again.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const loadCurrencies = async () => {
-    try {
-      const response = await currencyApi.getCurrencies();
-      setCurrencies(response.currencies);
-    } catch (err: any) {
-      setError('Failed to load currencies');
-    }
-  };
+    fetchInitialData();
+  }, [page]);
 
-  const loadConversionHistory = async (newPage?: number) => {
+  const loadConversionHistory = async (newPage: number) => {
     setIsLoading(true);
     try {
-      const response = await currencyApi.getConversionHistory(newPage || page);
+      const response = await currencyApi.getConversionHistory(newPage);
       setConversionHistory(response.conversions);
       setMaxPage(response.pagination.pages);
+      setPage(newPage); // Update page state
     } catch (err: any) {
       setError('Failed to load conversion history');
     } finally {
@@ -143,9 +151,7 @@ export const Conversions: React.FC = () => {
                             className="join-item btn btn-sm lg:btn-md" 
                             onClick={() => {
                               if (page > 1) {
-                                const newPage = page - 1;
-                                loadConversionHistory(newPage);
-                                setPage(newPage);
+                                loadConversionHistory(page - 1);
                               }
                             }}
                             disabled={page <= 1}
@@ -157,9 +163,7 @@ export const Conversions: React.FC = () => {
                             className="join-item btn btn-sm lg:btn-md" 
                             onClick={() => {
                               if (page < maxPage) {
-                                const newPage = page + 1;
-                                loadConversionHistory(newPage);
-                                setPage(newPage);
+                                loadConversionHistory(page + 1);
                               }
                             }}
                             disabled={page >= maxPage}

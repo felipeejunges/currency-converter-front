@@ -1,6 +1,15 @@
 // Format currency value with symbol
 export const formatCurrency = (value: number | string, symbol: string): string => {
+  if (value === undefined || value === null || value === '') {
+    return `${symbol}0.00`;
+  }
+  
   const numValue = typeof value === 'string' ? parseFloat(value) : value;
+  
+  if (isNaN(numValue)) {
+    return `${symbol}0.00`;
+  }
+  
   return `${symbol}${numValue.toFixed(2)}`;
 };
 
@@ -18,7 +27,16 @@ export const formatDate = (dateString: string): string => {
 
 // Format exchange rate
 export const formatRate = (rate: number | string): string => {
+  if (rate === undefined || rate === null || rate === '') {
+    return '0.0000';
+  }
+  
   const numRate = typeof rate === 'string' ? parseFloat(rate) : rate;
+  
+  if (isNaN(numRate)) {
+    return '0.0000';
+  }
+  
   return numRate.toFixed(4);
 };
 

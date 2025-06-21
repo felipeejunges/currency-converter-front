@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { Alert } from '../components/Alert';
@@ -12,11 +12,29 @@ export const Login: React.FC = () => {
   const [error, setError] = useState('');
   const [emailError, setEmailError] = useState('');
 
-  const { login } = useAuth();
+  const { login, isAuthenticated, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/convert';
+
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      navigate('/convert');
+    }
+  }, [isAuthenticated, authLoading, navigate]);
+
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="loading loading-spinner loading-lg"></div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   const validateEmail = (email: string) => {
     if (!email) {
@@ -86,7 +104,7 @@ export const Login: React.FC = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                type="email"
+                type="text"
                 placeholder="Enter your email"
                 className={`input input-bordered ${emailError ? 'input-error' : ''}`}
                 value={email}
