@@ -2,6 +2,9 @@
 
 A modern, responsive React application for currency conversion with real-time exchange rates, user authentication, and conversion history tracking.
 
+## Live Preview
+**[Currency Converter Deployed App](http://currency-converter.junges.dev.br/)**, https is not configured, so be sure that http is there on link
+
 ## Backend Application
 🌐 **[Currency Converter Backend](https://github.com/felipeejunges/currency-converter-back)**
 

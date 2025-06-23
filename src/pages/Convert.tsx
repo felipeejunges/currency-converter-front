@@ -102,26 +102,39 @@ export const Convert: React.FC = () => {
 
       <div className="container mx-auto px-4 py-8">
         {/* Mobile Tabs */}
-        <div className="lg:hidden tabs tabs-boxed bg-base-200 mb-4">
-          <a
+        <div className="lg:hidden tabs tabs-boxed bg-base-200 mb-4" role="tablist">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'convert'}
+            aria-controls="convert-panel"
             className={`tab grow ${activeTab === 'convert' ? 'tab-active' : ''}`}
             onClick={() => setActiveTab('convert')}
           >
             <FontAwesomeIcon icon={faExchangeAlt} className="mr-2" />
             Convert
-          </a>
-          <a
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'result'}
+            aria-controls="result-panel"
             className={`tab grow ${activeTab === 'result' ? 'tab-active' : ''}`}
             onClick={() => setActiveTab('result')}
           >
             <FontAwesomeIcon icon={faChartLine} className="mr-2" />
             Result
-          </a>
+          </button>
         </div>
 
         {/* Mobile Content */}
         <div className="lg:hidden flex-1 min-h-0">
-          {activeTab === 'convert' ? (
+          <div
+            role="tabpanel"
+            id="convert-panel"
+            aria-labelledby="convert-tab"
+            hidden={activeTab !== 'convert'}
+          >
             <ConversionForm
               currencies={currencies}
               isConverting={isConverting}
@@ -133,12 +146,18 @@ export const Convert: React.FC = () => {
               onErrorClose={() => setError('')}
               onSuccessClose={() => setSuccess('')}
             />
-          ) : (
+          </div>
+          <div
+            role="tabpanel"
+            id="result-panel"
+            aria-labelledby="result-tab"
+            hidden={activeTab !== 'result'}
+          >
             <ConversionResult
               conversionResult={conversionResult}
               currencies={currencies}
             />
-          )}
+          </div>
         </div>
 
         {/* Desktop Layout */}
