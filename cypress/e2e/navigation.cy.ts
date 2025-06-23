@@ -22,7 +22,7 @@ describe('Navigation and Routing', () => {
     cy.get('a').contains('View History').click()
     cy.url().should('include', '/conversions')
     
-    cy.get('a').contains('Convert Currency').click()
+    cy.get('a').contains('Convert').click()
     cy.url().should('include', '/convert')
   })
 
@@ -77,14 +77,14 @@ describe('Navigation and Routing', () => {
     cy.visit('/convert')
     
     cy.get('.tabs').should('be.visible')
-    cy.get('.tab').should('contain', 'Convert Currency')
+    cy.get('.tab').should('contain', 'Convert')
     cy.get('.tab').should('contain', 'Result')
     
     cy.get('.tab').contains('Result').click()
     cy.get('h2').contains('Conversion Result').should('be.visible')
     
-    cy.get('.tab').contains('Convert Currency').click()
-    cy.get('h2').contains('Convert Currency').should('be.visible')
+    cy.get('.tab').contains('Convert').click()
+    cy.get('h2').contains('Convert').should('be.visible')
   })
 
   it('should show desktop navigation on larger screens', () => {
@@ -96,7 +96,7 @@ describe('Navigation and Routing', () => {
     cy.get('a').contains('View History').should('be.visible')
     
     cy.visit('/conversions')
-    cy.get('a').contains('Convert Currency').should('be.visible')
+    cy.get('a').contains('Convert').should('be.visible')
   })
 
   it('should handle browser back/forward navigation', () => {
