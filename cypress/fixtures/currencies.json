@@ -1,0 +1,32 @@
+{
+  "currencies": [
+    {
+      "id": 1,
+      "code": "USD",
+      "name": "US Dollar",
+      "symbol": "$",
+      "symbol_native": "$"
+    },
+    {
+      "id": 2,
+      "code": "BRL",
+      "name": "Brazilian Real",
+      "symbol": "R$",
+      "symbol_native": "R$"
+    },
+    {
+      "id": 3,
+      "code": "EUR",
+      "name": "Euro",
+      "symbol": "€",
+      "symbol_native": "€"
+    },
+    {
+      "id": 4,
+      "code": "JPY",
+      "name": "Japanese Yen",
+      "symbol": "¥",
+      "symbol_native": "¥"
+    }
+  ]
+} 
